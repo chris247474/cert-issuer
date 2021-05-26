@@ -6,12 +6,15 @@ COPY conf_regtest.ini /etc/cert-issuer/conf.ini
 
 RUN apk add --update \
         bash \
+	nano \
         ca-certificates \
         curl \
         gcc \
         gmp-dev \
         libffi-dev \
         libressl-dev \
+	libxml2-dev \
+	libxslt-dev \
         linux-headers \
         make \
         musl-dev \
