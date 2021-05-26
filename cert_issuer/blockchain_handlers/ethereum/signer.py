@@ -12,7 +12,7 @@ class EthereumSigner(Signer):
         # Netcode ensures replay protection (see EIP155)
         if ethereum_chain.external_display_value == 'ethereumMainnet':
             self.netcode = 1
-        elif ethereum_chain.external_display_value == 'ethereumRopsten':
+        elif ethereum_chain.external_display_value == 'ethereumRopsten': # review - will need a net network 'quorumKaleido'
             self.netcode = 3
         else:
             self.netcode = None

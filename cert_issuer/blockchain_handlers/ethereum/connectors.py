@@ -1,3 +1,5 @@
+# review - refractor for web3 python
+
 import logging
 import time
 
@@ -10,7 +12,7 @@ except ImportError:
     from urllib.request import urlopen, HTTPError
     from urllib.parse import urlencode
 
-from cert_core import Chain
+from cert_core import Chain # review - is this a package
 from cert_issuer.models import ServiceProviderConnector
 from cert_issuer.errors import BroadcastError
 
@@ -90,7 +92,7 @@ class EtherscanBroadcaster(object):
     def __init__(self, base_url):
         self.base_url = base_url
 
-    def broadcast_tx(self, tx, api_token):
+    def broadcast_tx(self, tx, api_token): # review - referenced externally
         tx_hex = tx
 
         broadcast_url = self.base_url + '?module=proxy&action=eth_sendRawTransaction'
@@ -109,7 +111,7 @@ class EtherscanBroadcaster(object):
         logging.error('Error broadcasting the transaction through the Etherscan API. Error msg: %s', response.text)
         raise BroadcastError(response.text)
 
-    def get_balance(self, address, api_token):
+    def get_balance(self, address, api_token): # review - referenced externally
         """
         returns the balance in wei
         with some inspiration from PyWallet
@@ -128,7 +130,7 @@ class EtherscanBroadcaster(object):
             return balance
         raise BroadcastError(response.text)
 
-    def get_address_nonce(self, address, api_token):
+    def get_address_nonce(self, address, api_token): # review - referenced externally
         """
         Looks up the address nonce of this address
         Neccesary for the transaction creation

@@ -14,7 +14,7 @@ from cert_issuer.signer import FileSecretManager
 
 
 class EthereumTransactionCostConstants(object):
-    def __init__(self, recommended_gas_price=20000000000, recommended_gas_limit=25000):
+    def __init__(self, recommended_gas_price=20000000000, recommended_gas_limit=25000): # review regarding possible 0 gas config on kaleido
         self.recommended_gas_price = recommended_gas_price
         self.recommended_gas_limit = recommended_gas_limit
         logging.info('Set cost constants to recommended_gas_price=%f, recommended_gas_limit=%f',
@@ -59,9 +59,9 @@ def instantiate_blockchain_handlers(app_config):
     if chain == Chain.mockchain:
         transaction_handler = MockTransactionHandler()
     # ethereum chains
-    elif chain == Chain.ethereum_mainnet or chain == Chain.ethereum_ropsten:
+    elif chain == Chain.ethereum_mainnet or chain == Chain.ethereum_ropsten: # review - add condition for 'quorumKaleido' Chain value
         cost_constants = EthereumTransactionCostConstants(app_config.gas_price, app_config.gas_limit)
-        connector = EthereumServiceProviderConnector(chain, app_config.api_token)
+        connector = EthereumServiceProviderConnector(chain, app_config.api_token) # review - change api_token param into seed phrase from env file
         transaction_handler = EthereumTransactionHandler(connector, cost_constants, secret_manager,
                                                          issuing_address=issuing_address)
 
